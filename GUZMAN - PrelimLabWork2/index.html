@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Attendance System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fdd5df 50%, #ffffcc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(44, 14, 38, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-family: 'Arial Black', Gadget, sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff9a9e 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .welcome-section {
+            display: none;
+            text-align: center;
+        }
+
+        .welcome-section h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+
+        .timestamp {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            color: #555;
+        }
+
+        .timestamp strong {
+            color: #333;
+        }
+
+        .download-btn {
+            background: #27ae60;
+            margin-top: 20px;
+        }
+
+        .download-btn:hover {
+            background: #229954;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            margin-top: 10px;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        .attendance-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .attendance-item {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .attendance-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loginForm">
+            <h1>ATTENDANCE LOGIN SYSTEM</h1>
+            <form id="login">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="sectionOccupation">Section / Occupation:</label>
+                    <input type="text" id="sectionOccupation" name="sectionOccupation" placeholder="e.g. Section A or Teacher" required>
+                </div>
+                <button type="submit">Log In</button>
+                <div class="error-message" id="errorMessage">
+                    ❌ Invalid username or password!
+                </div>
+            </form>
+        </div>
+
+        <div class="welcome-section" id="welcomeSection">
+            <h2 id="welcomeMessage"></h2>
+            <div class="timestamp" id="timestampDisplay"></div>
+            
+            <div class="attendance-list" id="attendanceList">
+                <strong>Recent Logins:</strong>
+                <div id="attendanceRecords"></div>
+            </div>
+
+            <button class="download-btn" id="showClassificationBtn" style="background:#555;margin-top:6px;">Show Classification Summary</button>
+            <div class="attendance-list" id="classificationSummary" style="display:none;margin-top:12px;"></div>
+
+            <button class="download-btn" onclick="downloadAttendance()">
+                Download Attendance Summary
+            </button>
+               <button class="download-btn" onclick="downloadCSV()" style="background:#1e90ff;margin-top:8px;">📄 Download CSV</button>
+            <button class="logout-btn" onclick="logout()">
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <audio id="beep" src="beep.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
