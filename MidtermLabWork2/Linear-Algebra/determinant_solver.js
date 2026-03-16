@@ -163,3 +163,8 @@ function solveDeterminant(m) {
 // with the predefined matrix as input.
 
 solveDeterminant(matrix);
+
+// Export for programmatic use (allows requiring this file in other scripts/tests)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { solveDeterminant };
+}
