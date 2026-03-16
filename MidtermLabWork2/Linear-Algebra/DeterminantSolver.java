@@ -12,6 +12,18 @@
  *   to GUZMAN, FRANCESS PRICEAH S. for Math 101. The solution is computed using cofactor
  *   expansion along the first row. Each intermediate step (2x2 minor,
  *   cofactor term, running sum) is printed to the console in a readable format.
+ *
+ * Detailed algorithm notes (added for clarity):
+ *  - Cofactor expansion (Laplace expansion) along the first row:
+ *      det(M) = m00 * det(M11) - m01 * det(M12) + m02 * det(M13)
+ *    where Mij denotes the 2x2 submatrix formed by removing row i and
+ *    column j from the original 3x3 matrix.
+ *  - Each 2x2 minor is computed using the formula det([[a,b],[c,d]]) = a*d - b*c.
+ *  - The sign pattern for cofactors alternates by position: + - + on the first row,
+ *    which we implement explicitly by negating the second cofactor term.
+ *  - Complexity: this direct expansion takes constant time for a 3x3 matrix (O(1)),
+ *    but the general cofactor expansion for an n×n matrix is O(n!). For larger
+ *    matrices use optimized methods (LU decomposition, Gaussian elimination).
  * =====================================================
  */
 
